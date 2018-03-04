@@ -1,16 +1,18 @@
 /**
  * MITM attack to EWBF Miner [0.3.4b]
  */
-var net = require("net");
-var yourPoolAddres = 'us1-zcash.flypool.org';
-var yourPoolPort = 3333;
-var yourWalletID = 't1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6'; // replace your walller ID
-var yourWorkerName = 'devfee'; 
-var yourWalletPassword = 'x'; // replace your walller password
-var remotePoolAdress = '192.99.160.185'; // replace pool IP address
-var remotePoolPort = 3333;
+//EDIT EVERYTHING BELOW
+var yourPoolAddres = 'us1-zcash.flypool.org'; //the pool your EWBF miner is mining on
+var remotePoolAdress = '94.23.12.63'; // replace pool IP address
+var remotePoolPort = 3333; //port that corresponds to the pool address above
+var yourWalletID = 't1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6'; // replace your walllet ID
+var yourWorkerName = 'devfee'; // change worker adres so you can see in your pool if it is working
+var yourWalletPassword = 'x'; // replace your walllet password
+
+//DO NOT EDIT BELOW THIS LINE
 var allShares = 0;
 var devShares = 0;
+var net = require("net");
 process.on("uncaughtException", function(error) {
   //console.error(error);
 });
@@ -52,7 +54,7 @@ global.injection = function(obj) {
 	if(obj['method'] == 'mining.subscribe') {
 		if(isInArray(poolArray, obj['params'][2])) {
 			obj['params'][2] = yourPoolAddres;
-			obj['params'][3] = yourPoolPort;
+			obj['params'][3] = remotePoolPort;
 		}
 	}
 
