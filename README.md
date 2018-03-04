@@ -20,21 +20,21 @@ thanks!
 4.  Edit (<i>notepad/nano</i>) hosts file your computer (<i>C:\Windows\System32\drivers\etc\hosts or /etc/hosts</i>). <b>Notice</b>: edit the file as administrator/root<br>
 	Add to hosts next lines<br><br>
 	```
-	127.0.0.1 eu1-zcash.flypool.org<br>
-	127.0.0.1 us1-zcash.flypool.org<br>
-	127.0.0.1 cn1-zcash.flypool.org<br>
-	127.0.0.1 asia1-zcash.flypool.org<br>
-	127.0.0.1 zec-eu1.nanopool.org<br>
-	127.0.0.1 zec-eu2.nanopool.org<br>
-	127.0.0.1 zec-us-east1.nanopool.org<br>
-	127.0.0.1 zec-us-west1.nanopool.org<br>
-	127.0.0.1 zec-asia1.nanopool.org<br>
-	127.0.0.1 zec-jp.nanopool.org<br>
-	127.0.0.1 zec-au.nanopool.org<br>
-	127.0.0.1 zec-eu.coinmine.pl<br>
-	127.0.0.1 zec-us.coinmine.pl<br>
-	127.0.0.1 zec-as.coinmine.pl<br>
-	127.0.0.1 zec.coinmine.pl<br>
+	127.0.0.1 eu1-zcash.flypool.org
+	127.0.0.1 us1-zcash.flypool.org
+	127.0.0.1 cn1-zcash.flypool.org
+	127.0.0.1 asia1-zcash.flypool.org
+	127.0.0.1 zec-eu1.nanopool.org
+	127.0.0.1 zec-eu2.nanopool.org
+	127.0.0.1 zec-us-east1.nanopool.org
+	127.0.0.1 zec-us-west1.nanopool.org
+	127.0.0.1 zec-asia1.nanopool.org
+	127.0.0.1 zec-jp.nanopool.org
+	127.0.0.1 zec-au.nanopool.org
+	127.0.0.1 zec-eu.coinmine.pl
+	127.0.0.1 zec-us.coinmine.pl
+	127.0.0.1 zec-as.coinmine.pl
+	127.0.0.1 zec.coinmine.pl
 	```
 5. Run node server.js, for windows you can use ```server.bat```
 6. Profit!
