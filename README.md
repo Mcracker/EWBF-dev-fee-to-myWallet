@@ -4,11 +4,9 @@ Remove EWBF miner fee with node.js. Works in Windows/Linux.<br>
 How does it work?  --> MITM attack to EWBF miner. Replaces developer wallet address with yours<br>
 
 ## Supported pools:
-```
-Flypool.org
-Nanopool.org
-coinmine.pl
-```
+- Flypool.org
+- Nanopool.org
+- coinmine.pl
 
 ----------------------------------------------------------
 Donations are welcome & appreciated!<br>
