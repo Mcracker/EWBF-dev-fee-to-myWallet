@@ -346,11 +346,75 @@ var server4 = net.createServer(function (localsocket) {
 
 });
 
+var server5 = net.createServer(function (localsocket) {
+  var remotesocket = new net.Socket();
 
+  remotesocket.connect(remotePoolPort, remotePoolAdress);
+
+  localsocket.on('connect', function (data) {
+    console.log(">>> connection #%d from %s:%d",
+      server.remoteAddress,
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+  });
+
+  localsocket.on('data', function (data) {
+	data = injection(data);
+	
+    var flushed = remotesocket.write(data);
+    if (!flushed) {
+      console.log("  remote not flushed; pausing local");
+      localsocket.pause();
+    }
+  });
+
+  remotesocket.on('data', function(data) {
+    var flushed = localsocket.write(data);
+    if (!flushed) {
+      console.log("  local not flushed; pausing remote");
+      remotesocket.pause();
+    }
+  });
+
+  localsocket.on('drain', function() {
+    console.log("%s:%d - resuming remote",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    remotesocket.resume();
+  });
+
+  remotesocket.on('drain', function() {
+    console.log("%s:%d - resuming local",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    localsocket.resume();
+  });
+
+  localsocket.on('close', function(had_error) {
+    console.log("%s:%d - closing remote",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    remotesocket.end();
+  });
+
+  remotesocket.on('close', function(had_error) {
+    console.log("%s:%d - closing local",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    localsocket.end();
+  });
+
+});
 	
 server1.listen(3333);
 server2.listen(6666);
 server3.listen(8088);
 server4.listen(8008);
+server5.listen(remotePoolPort);
 
-console.log("redirecting connections from 127.0.0.1:3333/6666/8088/8008 to %s:%d", remotePoolAdress, remotePoolPort);
+console.log("redirecting connections from EWFB miner to %s:%d", remotePoolAdress, remotePoolPort);
