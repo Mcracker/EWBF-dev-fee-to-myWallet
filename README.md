@@ -19,6 +19,8 @@ Litecoin : LXMVRseNUE7x4v8vJaHj3N4ZxsmwxpNX1x<br>
 Zcash    : t1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6
 
 ----------------------------------------------------------
+
+## Installation
 1.  Go to https://www.site24x7.com/find-ip-address-of-web-site.html 
 <br>Find ip domain name your pool (eq: <b>eu1-zcash.flypool.org</b> --> <b>94.23.12.63</b>). and replace ```remotePoolAdress``` in server.js for example: ```var remotePoolAdress = '94.23.12.63';```
 2.  Go to https://nodejs.org/en/ and download last version. Install node.js on your computer.
@@ -44,3 +46,7 @@ Zcash    : t1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6
 	```
 5. Run node server.js, for windows you can use ```server.bat```
 6. Profit!
+
+## FAQ
+- Q: My pool is not supported, please help!
+  A: Find the pool you want to mine for example suprnova and the coin ZEN. Add this to your hosts: ```127.0.0.1 zen.suprnova.cc``` and add the other stuff to your server.js.
