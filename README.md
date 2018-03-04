@@ -48,5 +48,5 @@ Zcash    : t1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6
 6. Profit!
 
 ## FAQ
-- Q: My pool is not supported, please help!
+- Q: My pool is not supported, please help!<br>
   A: Find the pool you want to mine for example suprnova and the coin ZEN. Add this to your hosts: ```127.0.0.1 zen.suprnova.cc``` and add the other stuff to your server.js.
