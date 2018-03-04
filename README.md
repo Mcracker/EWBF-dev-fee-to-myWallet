@@ -1,6 +1,7 @@
 # EWBF-dev-fee-remover
-###### Remove EWBF miner fee with node.js. Works in Windows/Linux.<br><br>
-###### How does it work?  --> MITM attack to EWBF miner. Replaces developer wallet address with yours<br>
+ Remove EWBF miner fee with node.js. Works in Windows/Linux.
+ How does it work?  --> MITM attack to EWBF miner. Replaces developer wallet address with yours
+ 
 ----------------------------------------------------------
 Donations are welcome & appreciated!<br>
 
@@ -10,7 +11,6 @@ Dash     : XshssKhrFMnZAMcL94qpqyfg61kWEFv3gm<br>
 Ethereum : 0xdbb6382a63a5fa63166733382f796aafba75a54f<br>
 Litecoin : LXMVRseNUE7x4v8vJaHj3N4ZxsmwxpNX1x<br>
 Zcash    : t1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6
-thanks!
 
 ----------------------------------------------------------
 1.  Go to https://www.site24x7.com/find-ip-address-of-web-site.html 
