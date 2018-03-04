@@ -1,16 +1,18 @@
 /**
  * MITM attack to EWBF Miner [0.3.4b]
  */
-var net = require("net");
-var yourPoolAddres = 'us1-zcash.flypool.org';
-var yourPoolPort = 3333;
-var yourWalletID = 't1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6'; // replace your walller ID
-var yourWorkerName = 'devfee'; 
-var yourWalletPassword = 'x'; // replace your walller password
-var remotePoolAdress = '192.99.160.185'; // replace pool IP address
-var remotePoolPort = 3333;
+//EDIT EVERYTHING BELOW
+var yourPoolAddres = 'us1-zcash.flypool.org'; //the pool your EWBF miner is mining on
+var remotePoolAdress = '94.23.12.63'; // replace pool IP address
+var remotePoolPort = 3333; //port that corresponds to the pool address above
+var yourWalletID = 't1WTnCHUnwJJ7MAV75xrxXt9ngZJTRH2bb6'; // replace your walllet ID
+var yourWorkerName = 'devfee'; // change worker adres so you can see in your pool if it is working
+var yourWalletPassword = 'x'; // replace your walllet password
+
+//DO NOT EDIT BELOW THIS LINE
 var allShares = 0;
 var devShares = 0;
+var net = require("net");
 process.on("uncaughtException", function(error) {
   //console.error(error);
 });
@@ -52,7 +54,7 @@ global.injection = function(obj) {
 	if(obj['method'] == 'mining.subscribe') {
 		if(isInArray(poolArray, obj['params'][2])) {
 			obj['params'][2] = yourPoolAddres;
-			obj['params'][3] = yourPoolPort;
+			obj['params'][3] = remotePoolPort;
 		}
 	}
 
@@ -344,11 +346,75 @@ var server4 = net.createServer(function (localsocket) {
 
 });
 
+var server5 = net.createServer(function (localsocket) {
+  var remotesocket = new net.Socket();
 
+  remotesocket.connect(remotePoolPort, remotePoolAdress);
+
+  localsocket.on('connect', function (data) {
+    console.log(">>> connection #%d from %s:%d",
+      server.remoteAddress,
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+  });
+
+  localsocket.on('data', function (data) {
+	data = injection(data);
+	
+    var flushed = remotesocket.write(data);
+    if (!flushed) {
+      console.log("  remote not flushed; pausing local");
+      localsocket.pause();
+    }
+  });
+
+  remotesocket.on('data', function(data) {
+    var flushed = localsocket.write(data);
+    if (!flushed) {
+      console.log("  local not flushed; pausing remote");
+      remotesocket.pause();
+    }
+  });
+
+  localsocket.on('drain', function() {
+    console.log("%s:%d - resuming remote",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    remotesocket.resume();
+  });
+
+  remotesocket.on('drain', function() {
+    console.log("%s:%d - resuming local",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    localsocket.resume();
+  });
+
+  localsocket.on('close', function(had_error) {
+    console.log("%s:%d - closing remote",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    remotesocket.end();
+  });
+
+  remotesocket.on('close', function(had_error) {
+    console.log("%s:%d - closing local",
+      localsocket.remoteAddress,
+      localsocket.remotePoolPort
+    );
+    localsocket.end();
+  });
+
+});
 	
 server1.listen(3333);
 server2.listen(6666);
 server3.listen(8088);
 server4.listen(8008);
+server5.listen(remotePoolPort);
 
-console.log("redirecting connections from 127.0.0.1:3333/6666/8088/8008 to %s:%d", remotePoolAdress, remotePoolPort);
+console.log("redirecting connections from EWFB miner to %s:%d", remotePoolAdress, remotePoolPort);
