@@ -1,6 +1,7 @@
 # EWBF-dev-fee-remover
- Remove EWBF miner fee with node.js. Works in Windows/Linux.
- How does it work?  --> MITM attack to EWBF miner. Replaces developer wallet address with yours
+
+Remove EWBF miner fee with node.js. Works in Windows/Linux.<br>
+How does it work?  --> MITM attack to EWBF miner. Replaces developer wallet address with yours
  
 ----------------------------------------------------------
 Donations are welcome & appreciated!<br>
